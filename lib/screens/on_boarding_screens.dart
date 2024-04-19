@@ -101,7 +101,7 @@ class OnBoardingScreens extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: (){
-                              Navigator.pushNamed(context, HomeScreen.routeName);
+                              Navigator.pushReplacementNamed(context, HomeScreen.routeName);
 
                             },
                             child: Container(

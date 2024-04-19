@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
+import 'package:price_comparison_app/screens/product_screen.dart';
 
 
 class HomeTab extends StatelessWidget {
@@ -101,15 +102,12 @@ class HomeTab extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
-                                    child: InkWell(
-                                      onTap:(){},
-                                      child: Container(
-                                        height: 270,
-                                        width: 143,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(20),
-                                            color: Colors.white
-                                        ),
+                                    child: Container(
+                                      height: 270,
+                                      width: 143,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: Colors.white
                                       ),
                                     ),
                                   ),
@@ -117,15 +115,20 @@ class HomeTab extends StatelessWidget {
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Column(
                                       children: [
-                                        Container(
-                                          height: 200,
-                                          width: 143,
-                                          child:ClipRRect(
-                                            borderRadius: BorderRadius.circular(20),
-                                            child: Image.asset(AppAssets.product,
-                                              fit: BoxFit.cover,),
-                                          ),
-                                          ),
+                                        InkWell(
+                                          onTap: (){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                                          },
+                                          child: Container(
+                                            height: 200,
+                                            width: 143,
+                                            child:ClipRRect(
+                                              borderRadius: BorderRadius.circular(20),
+                                              child: Image.asset(AppAssets.product,
+                                                fit: BoxFit.cover,),
+                                            ),
+                                            ),
+                                        ),
                                         Text('T-Shirt',
                                         style: TextStyle(
                                           fontSize: 16,
@@ -168,15 +171,12 @@ class HomeTab extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
-                                    child: InkWell(
-                                      onTap:(){},
-                                      child: Container(
-                                        height: 270,
-                                        width: 143,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(20),
-                                            color: Colors.white
-                                        ),
+                                    child: Container(
+                                      height: 270,
+                                      width: 143,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: Colors.white
                                       ),
                                     ),
                                   ),
@@ -184,13 +184,18 @@ class HomeTab extends StatelessWidget {
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Column(
                                       children: [
-                                        Container(
-                                          height: 200,
-                                          width: 143,
-                                          child:ClipRRect(
-                                            borderRadius: BorderRadius.circular(20),
-                                            child: Image.asset(AppAssets.product,
-                                              fit: BoxFit.cover,),
+                                        InkWell(
+                                          onTap: (){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                                          },
+                                          child: Container(
+                                            height: 200,
+                                            width: 143,
+                                            child:ClipRRect(
+                                              borderRadius: BorderRadius.circular(20),
+                                              child: Image.asset(AppAssets.product,
+                                                fit: BoxFit.cover,),
+                                            ),
                                           ),
                                         ),
                                         Text('T-Shirt',
@@ -235,15 +240,12 @@ class HomeTab extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
-                                    child: InkWell(
-                                      onTap:(){},
-                                      child: Container(
-                                        height: 270,
-                                        width: 143,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(20),
-                                            color: Colors.white
-                                        ),
+                                    child: Container(
+                                      height: 270,
+                                      width: 143,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: Colors.white
                                       ),
                                     ),
                                   ),
@@ -251,13 +253,18 @@ class HomeTab extends StatelessWidget {
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Column(
                                       children: [
-                                        Container(
-                                          height: 200,
-                                          width: 143,
-                                          child:ClipRRect(
-                                            borderRadius: BorderRadius.circular(20),
-                                            child: Image.asset(AppAssets.product,
-                                              fit: BoxFit.cover,),
+                                        InkWell(
+                                          onTap: (){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                                          },
+                                          child: Container(
+                                            height: 200,
+                                            width: 143,
+                                            child:ClipRRect(
+                                              borderRadius: BorderRadius.circular(20),
+                                              child: Image.asset(AppAssets.product,
+                                                fit: BoxFit.cover,),
+                                            ),
                                           ),
                                         ),
                                         Text('T-Shirt',

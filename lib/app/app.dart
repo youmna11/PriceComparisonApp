@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:price_comparison_app/screens/home_screen.dart';
 import 'package:price_comparison_app/screens/splash_screen.dart';
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

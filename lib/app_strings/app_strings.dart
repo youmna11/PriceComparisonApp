@@ -11,6 +11,12 @@ class AppStrings{
   static const String onBoardingSubTitleThree = 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.';
   static const String onBoardingSubTitleFour = 'Bot Can help you to find the best product and suggest similar product, print, and publishing industries for previewing layouts and visual.';
   static const String onBoardingSubTitleFive = 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.';
+  static const String email = 'youmna@gmail.com';
+  static const String phone = '01012885532';
+  static const String signout = 'SignOut';
+  static const String setting = 'Setting';
+
+
 
 
 

@@ -12,6 +12,24 @@ class AppAssets{
   static const String jumia='${basePath}jumia.jpg';
   static const String shein='${basePath}shein.jpg';
   static const String product='${basePath}product.png';
+  static const String profile='${basePath}profile3.png';
+  static const String edit='${basePath}edit.png';
+  static const String email='${basePath}email.png';
+  static const String avatar='${basePath}avatar.png';
+  static const String language='${basePath}language.png';
+  static const String notification='${basePath}notification.png';
+  static const String help='${basePath}help.png';
+  static const String info='${basePath}info.png';
+  static const String favorite='${basePath}favorite.png';
+
+
+
+
+
+
+
+
+
 
 
 
