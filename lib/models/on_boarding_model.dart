@@ -25,10 +25,6 @@ class OnBoardingModel {
         title: AppStrings.onBoardingTitleThree,
         subTitle: AppStrings.onBoardingSubTitleThree),
     OnBoardingModel(
-        imgPath: AppAssets.on4,
-        title: AppStrings.onBoardingTitleFour,
-        subTitle: AppStrings.onBoardingSubTitleFour),
-    OnBoardingModel(
         imgPath: AppAssets.on5,
         title: AppStrings.onBoardingTitleFive,
         subTitle: AppStrings.onBoardingSubTitleFive),

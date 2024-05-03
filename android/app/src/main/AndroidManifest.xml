@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="price_comparison_app"
+        android:label="Pricewise"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

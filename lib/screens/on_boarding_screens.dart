@@ -3,6 +3,7 @@ import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:price_comparison_app/app_strings/app_strings.dart';
 import 'package:price_comparison_app/models/on_boarding_model.dart';
 import 'package:price_comparison_app/screens/home_screen.dart';
+import 'package:price_comparison_app/screens/login/login.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,7 +26,7 @@ class OnBoardingScreens extends StatelessWidget {
               padding: const EdgeInsets.only(top: 6.4),
               child: Column(
                 children: [
-                  index!=4 ?Align(
+                  index!=3 ?Align(
                     alignment: Alignment.centerLeft,
                     child: TextButton(
                       child: Text(AppStrings.skip,
@@ -65,13 +66,13 @@ class OnBoardingScreens extends StatelessWidget {
                           ),),
                       ),
                       SizedBox(height: 108,),
-                      index!=4 ? Padding(
+                      index!=3 ? Padding(
                         padding: const EdgeInsets.only(left: 24,right: 24),
                         child: Row(
                           children: [
                             SmoothPageIndicator(
                               controller: controller,
-                              count: 4,
+                              count: 3,
                               effect: const ExpandingDotsEffect(
                                 activeDotColor: AppColors.lightGreen,
                                 dotColor: AppColors.yellow,
@@ -101,7 +102,7 @@ class OnBoardingScreens extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: (){
-                              Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                              Navigator.pushReplacementNamed(context, LoginScreen.routeName);
 
                             },
                             child: Container(

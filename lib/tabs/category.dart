@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
-import 'package:price_comparison_app/models/category.dart';
+import 'package:price_comparison_app/models/category_model.dart';
 import 'package:price_comparison_app/screens/category_item.dart';
 
 
@@ -24,11 +25,11 @@ class _CategoryTabState extends State<CategoryTab> {
         title: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text('Categories',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w300,
-              fontSize: 20
-          ),),
+            style: GoogleFonts.playfairDisplay(
+                color: Colors.white,
+                fontWeight: FontWeight.w300,
+                fontSize: 20
+            )),
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

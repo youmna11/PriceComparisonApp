@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:price_comparison_app/app_strings/app_strings.dart';
+import 'package:price_comparison_app/providers/my_provider.dart';
+import 'package:price_comparison_app/screens/login/login.dart';
 import 'package:price_comparison_app/screens/setting_screen.dart';
+import 'package:provider/provider.dart';
 
 
 class ProfileTab extends StatelessWidget {
@@ -10,6 +14,8 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var pro=Provider.of<MyProvider>(context);
+
     return Scaffold(
       backgroundColor: AppColors.lightGreen,
       body: Column(
@@ -142,39 +148,47 @@ class ProfileTab extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 40,),
-                Container(
-                    height: 51,
-                    width: 331,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                          color: AppColors.lightGreen,
-                          width: 1
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20
-                          ),
-                          child:  Text(AppStrings.signout,
-                            style: TextStyle(
-                                color: AppColors.lightGreen,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400
-                            ),),
+                InkWell(
+                  onTap: (){
+                    pro.logOut();
+                    Navigator.pushNamedAndRemoveUntil(context,
+                        LoginScreen.routeName, (route) => false);
+                  },
+                  child: Container(
+                      height: 51,
+                      width: 331,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: AppColors.lightGreen,
+                            width: 1
                         ),
-                        SizedBox(width: 200,),
-                        Icon(Icons.navigate_next,
-                          color: AppColors.lightGreen,
-                          size: 25,),
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 20
+                            ),
+                            child:  Text(AppStrings.signout,
+                              style: TextStyle(
+                                  color: AppColors.lightGreen,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400
+                              ),),
+                          ),
+                          SizedBox(width: 200,),
+                          Icon(Icons.navigate_next,
+                            color: AppColors.lightGreen,
+                            size: 25,),
 
 
 
-                      ],
-                    )
+                        ],
+                      )
+                  ),
                 ),
+                SizedBox(height: 40,),
 
 
               ],

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:price_comparison_app/providers/my_provider.dart';
+import 'package:price_comparison_app/screens/compresion_screen.dart';
 import 'package:price_comparison_app/screens/home_screen.dart';
+import 'package:price_comparison_app/screens/login/login.dart';
+import 'package:price_comparison_app/screens/signup/signup.dart';
 import 'package:price_comparison_app/screens/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -8,12 +13,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider =Provider.of<MyProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: SplashScreen.routeName,
+      initialRoute: provider.firebaseUser!=null? HomeScreen.routeName
+          :SplashScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         SplashScreen.routeName: (context) => SplashScreen(),
+        LoginScreen.routeName: (context) => LoginScreen(),
+        CompareScreen.routeName: (context) => CompareScreen(),
+        SignupScreen.routeName: (context) => SignupScreen(),
+
       },
       title: 'Flutter Demo',
     );

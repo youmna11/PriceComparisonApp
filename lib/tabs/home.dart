@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:price_comparison_app/screens/product_screen.dart';
+import 'package:price_comparison_app/screens/search_screen.dart';
 
 
 class HomeTab extends StatelessWidget {
@@ -11,34 +13,63 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightGreen,
+      backgroundColor: AppColors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.white,
+        toolbarHeight: 50,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('Pricewise',
+              style: GoogleFonts.pacifico(
+                  color: AppColors.lightGreen,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 20
+              )),
+        ),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(30),
+                bottomLeft: Radius.circular(30)
+            )
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 50,right: 15,left: 15),
-              child: TextField(
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(color: Colors.white)
+              padding: const EdgeInsets.only(top: 10,right: 15,left: 15),
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScreen()));
+                },
+                child: Container(
+                  height: 55,
+                  width: 450,
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(
+                      color: AppColors.lightGreen
+                    )
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      right: 10
                     ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(50)
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Search",
+                        style: GoogleFonts.playfairDisplay(
+                            color: AppColors.lightGreen,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w300
+                        )),
+                        Icon(Icons.search,color: AppColors.lightGreen,)
+                      ],
                     ),
-                    suffixIcon: Icon(Icons.search,color: Colors.white),
-                    labelText: "Search",
-                    contentPadding: EdgeInsets.all(12),
-
-                    labelStyle: TextStyle(
-                        color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w300
-                    ),
-                    filled: true,
-                    fillColor: AppColors.lightGreen
+                  ),
                 ),
               ),
             ),
@@ -76,7 +107,7 @@ class HomeTab extends StatelessWidget {
                   topRight: Radius.circular(35),
                   topLeft: Radius.circular(35)
                 ),
-                color:AppColors.blue
+                color:AppColors.white
               ),
               child: SingleChildScrollView(
                 child: Padding(
@@ -87,9 +118,9 @@ class HomeTab extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: Text("Featured Product",
-                        style: TextStyle(
-                          fontSize: 20
-                        ),),
+                        style: GoogleFonts.playfairDisplay(
+                            fontSize: 20
+                        )),
                       ),
                       SizedBox(height: 20,),
                       Container(
@@ -130,20 +161,21 @@ class HomeTab extends StatelessWidget {
                                             ),
                                         ),
                                         Text('T-Shirt',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold
-                                        ),),
+                                            style: GoogleFonts.playfairDisplay(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold
+                                            )),
                                         Text('300.00 EGP',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w200
-                                        ),),
+                                            style: GoogleFonts.playfairDisplay(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w200
+
+                                            )),
                                         Text('from Amazon',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold
-                                        ),)
+                                            style: GoogleFonts.playfairDisplay(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold
+                                            ))
                                       ],
                                     ),
                                   )
@@ -156,9 +188,9 @@ class HomeTab extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: Text("Most Popular",
-                          style: TextStyle(
+                          style: GoogleFonts.playfairDisplay(
                               fontSize: 20
-                          ),),
+                          )),
                       ),
                       SizedBox(height: 20,),
                       Container(
@@ -199,20 +231,21 @@ class HomeTab extends StatelessWidget {
                                           ),
                                         ),
                                         Text('T-Shirt',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold
-                                          ),),
+                                            style: GoogleFonts.playfairDisplay(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold
+                                            )),
                                         Text('300.00 EGP',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w200
-                                          ),),
+                                            style: GoogleFonts.playfairDisplay(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w200
+
+                                            )),
                                         Text('from Amazon',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold
-                                          ),)
+                                            style: GoogleFonts.playfairDisplay(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold
+                                            ))
                                       ],
                                     ),
                                   )
@@ -225,9 +258,9 @@ class HomeTab extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: Text("Featured Product",
-                          style: TextStyle(
+                          style: GoogleFonts.playfairDisplay(
                               fontSize: 20
-                          ),),
+                          )),
                       ),
                       SizedBox(height: 20,),
                       Container(
@@ -268,20 +301,21 @@ class HomeTab extends StatelessWidget {
                                           ),
                                         ),
                                         Text('T-Shirt',
-                                          style: TextStyle(
+                                          style: GoogleFonts.playfairDisplay(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold
-                                          ),),
+                                          )),
                                         Text('300.00 EGP',
-                                          style: TextStyle(
+                                          style: GoogleFonts.playfairDisplay(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w200
-                                          ),),
+
+                                          )),
                                         Text('from Amazon',
-                                          style: TextStyle(
-                                              fontSize: 14,
+                                          style: GoogleFonts.playfairDisplay(
+                                              fontSize: 12,
                                               fontWeight: FontWeight.bold
-                                          ),)
+                                          ))
                                       ],
                                     ),
                                   )
@@ -290,7 +324,7 @@ class HomeTab extends StatelessWidget {
                               );
                             }),
                       ),
-                      SizedBox(height: 100,)
+                      SizedBox(height: 200,)
 
 
                     ],

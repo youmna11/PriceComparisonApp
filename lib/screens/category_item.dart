@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
-import 'package:price_comparison_app/models/category.dart';
+import 'package:price_comparison_app/models/category_model.dart';
 
 
 class CategoryItem extends StatelessWidget {
@@ -27,11 +28,11 @@ class CategoryItem extends StatelessWidget {
               fit: BoxFit.fill,),
             SizedBox(height: 10,),
             Text("${genres.name}",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-              color: Colors.black26
-            ),),
+            style: GoogleFonts.playfairDisplay(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: Colors.black26
+            )),
           ],
         ),
       ),

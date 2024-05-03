@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -44,7 +45,7 @@ class ProductScreen extends StatelessWidget {
                     Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 89,top: 12),
+                          padding: const EdgeInsets.only(left: 89,top: 25),
                           child: Container(
                             height: 200,
                             width: 143,
@@ -57,24 +58,6 @@ class ProductScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20,),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 90
-                          ),
-                          child: SmoothPageIndicator(
-                            controller: controller,
-                            count: 3,
-                            effect: const ExpandingDotsEffect(
-                              activeDotColor: AppColors.lightGreen,
-                              dotColor: AppColors.yellow,
-                              dotWidth: 5,
-                              dotHeight: 5,
-                              spacing: 5,
-                            ),
-                          ),
-                        ),
-
                       ],
                     ),
                     Padding(
@@ -112,17 +95,19 @@ class ProductScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('T-Shirt',style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold
-                        ),),
+                        Text('T-Shirt',
+                          style: GoogleFonts.playfairDisplay(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold
+                          )),
                        Row(
                          children: [
                            Icon(Icons.star_rate,color: Colors.yellow,size: 25,),
-                           Text('(4.5)',style: TextStyle(
+                           Text('(4.5)',
+                               style: GoogleFonts.playfairDisplay(
                                fontSize: 14,
                                fontWeight: FontWeight.w400
-                           ),),
+                           )),
                          ],
                        )
                       ],
@@ -131,22 +116,22 @@ class ProductScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text("Product Details: ",
-                          style: TextStyle(
+                          style: GoogleFonts.playfairDisplay(
                               fontSize: 13,
                               fontWeight: FontWeight.bold
                           ),),
                       ],
                     ),
                     Text("Material composition , 100% Cotton ,Care instructions Machine Wash ,Closure type Pull On",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400
+                    style: GoogleFonts.playfairDisplay(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400
                     ),),
                     SizedBox(height: 40,),
                     Row(
                       children: [
                         Text("About this  item: ",
-                          style: TextStyle(
+                          style: GoogleFonts.playfairDisplay(
                               fontSize: 13,
                               fontWeight: FontWeight.bold
                           ),),
@@ -155,7 +140,7 @@ class ProductScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text("Material : Cotton \nColor : White \nBrand : Jet \nType : Undershirt \nNeck : Round",
-                          style: TextStyle(
+                          style: GoogleFonts.playfairDisplay(
                               fontSize: 13,
                               fontWeight: FontWeight.w400
                           ),),
@@ -166,10 +151,10 @@ class ProductScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('150.00 EGP',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.lightGreen
+                        style: GoogleFonts.playfairDisplay(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.lightGreen
                         ),),
                         ElevatedButton(
                             onPressed: (){},
@@ -179,10 +164,10 @@ class ProductScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(25)
                               )
                             ),
-                            child: Text('Go Amazon',style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
+                            child: Text('Go Amazon',style: GoogleFonts.playfairDisplay(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white
                             ),))
                       ],
                     )
