@@ -5,6 +5,7 @@ import 'package:price_comparison_app/screens/home_screen.dart';
 import 'package:price_comparison_app/screens/login/login.dart';
 import 'package:price_comparison_app/screens/signup/signup.dart';
 import 'package:price_comparison_app/screens/splash_screen.dart';
+import 'package:price_comparison_app/tabs/home.dart';
 import 'package:provider/provider.dart';
 
 
@@ -24,9 +25,12 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         CompareScreen.routeName: (context) => CompareScreen(),
         SignupScreen.routeName: (context) => SignupScreen(),
+        HomeTab.routeName: (context) => HomeTab(),
+
 
       },
       title: 'Flutter Demo',
     );
   }
+
 }

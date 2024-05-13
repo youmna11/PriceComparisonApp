@@ -9,6 +9,7 @@ class AppAssets{
   static const String amazon='${basePath}amazon.jpg';
   static const String noon='${basePath}noon.jpg';
   static const String carfour='${basePath}carfour.jpg';
+  static const String zara='${basePath}zara.jpg';
   static const String jumia='${basePath}jumia.jpg';
   static const String shein='${basePath}shein.jpg';
   static const String product='${basePath}product.png';
@@ -23,6 +24,11 @@ class AppAssets{
   static const String favorite='${basePath}favorite.png';
   static const String logo2='${basePath}logo2.png';
   static const String logo3='${basePath}logo3.png';
+  static const String amazonlogo='${basePath}amazon logo.png';
+  static const String sheinlogo='${basePath}shein logo.png';
+  static const String zaralogo='${basePath}zara logo.png';
+
+
 
 
 

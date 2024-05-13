@@ -48,30 +48,6 @@ class _CameraTabState extends State<CameraTab> {
             )));
   }
 
-  // Future _imageFromGallery(BuildContext context) async {
-  //   File? image;
-  //   imageFile =
-  //       await ImagePicker().pickImage(source: ImageSource.gallery) as File;
-  //   Uint8List _bytes = await imageFile!.readAsBytes();
-  //   String base64Image = base64.encode(_bytes);
-  //   setState(() {
-  //     imageFile = image;
-  //   });
-  //   Navigator.of(context).pop(); //close the model sheet
-  // }
-  //
-  // Future _imageFromCamera(BuildContext context) async {
-  //   File? image;
-  //   imageFile =
-  //       await ImagePicker().pickImage(source: ImageSource.camera) as File;
-  //   setState(() {
-  //     imageFile = image;
-  //   });
-  //   Navigator.of(context).pop(); //close the model sheet
-  //
-  // }
-
-  //Gallery
   Future _pickImageFromGallery() async {
     final returnImage =
     await ImagePicker().pickImage(source: ImageSource.gallery);

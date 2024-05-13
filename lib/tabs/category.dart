@@ -53,7 +53,7 @@ class _CategoryTabState extends State<CategoryTab> {
           ),
           child: GridView.builder(
             padding: EdgeInsets.all(10),
-              itemCount: 8,
+              itemCount: categories.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, mainAxisSpacing: 10, crossAxisSpacing: 10),
               itemBuilder: (context, index) {

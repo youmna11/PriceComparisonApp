@@ -4,9 +4,11 @@ import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:price_comparison_app/screens/product_screen.dart';
 import 'package:price_comparison_app/screens/search_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class HomeTab extends StatelessWidget {
+  static const String routeName = "hometab";
   HomeTab({Key? key}) : super(key: key);
 
 
@@ -76,27 +78,93 @@ class HomeTab extends StatelessWidget {
             SizedBox(height: 20,),
             Container(
               height: 80,
-              child: ListView.builder(
-                itemCount: 5,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context,count){
-                    return Padding(
-                      padding: const EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      left: 80
+                    ),
+                    child: InkWell(
+                      onTap: (){
+                        const link= "https://www.amazon.eg/";
+                        launchUrl(
+                          Uri.parse(link),
+                          mode: LaunchMode.externalApplication
+                        );
+                      },
                       child: Container(
                         height: 60,
                         width: 60,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: AppColors.white
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.white
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: Image.asset(AppAssets.amazon,
-                          fit: BoxFit.cover,),
+                            fit: BoxFit.cover,),
                         ),
                       ),
-                    );
-                  }),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      left: 30
+                    ),
+                    child: InkWell(
+                      onTap: (){
+                        const link= "https://ar.shein.com/";
+                        launchUrl(
+                            Uri.parse(link),
+                            mode: LaunchMode.externalApplication
+                        );
+                      },
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.white
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.asset(AppAssets.shein,
+                            fit: BoxFit.cover,),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      left: 30
+                    ),
+                    child: InkWell(
+                      onTap: (){
+                        const link= "https://www.zara.com/";
+                        launchUrl(
+                            Uri.parse(link),
+                            mode: LaunchMode.externalApplication
+                        );                      },
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: AppColors.white
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.asset(AppAssets.zara,
+                            fit: BoxFit.cover,),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: 25,),
             Container(
@@ -257,7 +325,7 @@ class HomeTab extends StatelessWidget {
                       SizedBox(height: 20,),
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
-                        child: Text("Featured Product",
+                        child: Text("Best Seller",
                           style: GoogleFonts.playfairDisplay(
                               fontSize: 20
                           )),

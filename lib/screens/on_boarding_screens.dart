@@ -57,13 +57,16 @@ class OnBoardingScreens extends StatelessWidget {
                       SizedBox(height: 30,),
                       Padding(
                         padding: const EdgeInsets.only(left: 10,right: 10),
-                        child: Text(
-                          OnBoardingModel.onBoardingScreens[index].subTitle,
-                          style: TextStyle(
-                              color: AppColors.lightGreen,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 15
-                          ),),
+                        child: Container(
+                          height: 115,
+                          child: Text(
+                            OnBoardingModel.onBoardingScreens[index].subTitle,
+                            style: TextStyle(
+                                color: AppColors.lightGreen,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15
+                            ),),
+                        ),
                       ),
                       SizedBox(height: 108,),
                       index!=3 ? Padding(
