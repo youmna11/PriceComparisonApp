@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
-import 'package:price_comparison_app/screens/product_screen.dart';
+import 'package:price_comparison_app/screens/featured_product_list.dart';
+import 'package:price_comparison_app/screens/most_popular_list.dart';
+import 'package:price_comparison_app/screens/best_seller_list.dart';
 import 'package:price_comparison_app/screens/search_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -191,67 +193,7 @@ class HomeTab extends StatelessWidget {
                         )),
                       ),
                       SizedBox(height: 20,),
-                      Container(
-                        height: 270,
-                        child: ListView.builder(
-                            itemCount: 5,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context,count){
-                              return Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Container(
-                                      height: 270,
-                                      width: 143,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          color: Colors.white
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      children: [
-                                        InkWell(
-                                          onTap: (){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
-                                          },
-                                          child: Container(
-                                            height: 200,
-                                            width: 143,
-                                            child:ClipRRect(
-                                              borderRadius: BorderRadius.circular(20),
-                                              child: Image.asset(AppAssets.product,
-                                                fit: BoxFit.cover,),
-                                            ),
-                                            ),
-                                        ),
-                                        Text('T-Shirt',
-                                            style: GoogleFonts.playfairDisplay(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold
-                                            )),
-                                        Text('300.00 EGP',
-                                            style: GoogleFonts.playfairDisplay(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w200
-
-                                            )),
-                                        Text('from Amazon',
-                                            style: GoogleFonts.playfairDisplay(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold
-                                            ))
-                                      ],
-                                    ),
-                                  )
-
-                                ],
-                              );
-                            }),
-                      ),
+                      FeaturedProductList(),
                       SizedBox(height: 20,),
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
@@ -261,67 +203,7 @@ class HomeTab extends StatelessWidget {
                           )),
                       ),
                       SizedBox(height: 20,),
-                      Container(
-                        height: 270,
-                        child: ListView.builder(
-                            itemCount: 5,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context,count){
-                              return Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Container(
-                                      height: 270,
-                                      width: 143,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          color: Colors.white
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      children: [
-                                        InkWell(
-                                          onTap: (){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
-                                          },
-                                          child: Container(
-                                            height: 200,
-                                            width: 143,
-                                            child:ClipRRect(
-                                              borderRadius: BorderRadius.circular(20),
-                                              child: Image.asset(AppAssets.product,
-                                                fit: BoxFit.cover,),
-                                            ),
-                                          ),
-                                        ),
-                                        Text('T-Shirt',
-                                            style: GoogleFonts.playfairDisplay(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold
-                                            )),
-                                        Text('300.00 EGP',
-                                            style: GoogleFonts.playfairDisplay(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w200
-
-                                            )),
-                                        Text('from Amazon',
-                                            style: GoogleFonts.playfairDisplay(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold
-                                            ))
-                                      ],
-                                    ),
-                                  )
-
-                                ],
-                              );
-                            }),
-                      ),
+                      MostPopularList(),
                       SizedBox(height: 20,),
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
@@ -331,67 +213,7 @@ class HomeTab extends StatelessWidget {
                           )),
                       ),
                       SizedBox(height: 20,),
-                      Container(
-                        height: 270,
-                        child: ListView.builder(
-                            itemCount: 5,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context,count){
-                              return Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Container(
-                                      height: 270,
-                                      width: 143,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          color: Colors.white
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      children: [
-                                        InkWell(
-                                          onTap: (){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
-                                          },
-                                          child: Container(
-                                            height: 200,
-                                            width: 143,
-                                            child:ClipRRect(
-                                              borderRadius: BorderRadius.circular(20),
-                                              child: Image.asset(AppAssets.product,
-                                                fit: BoxFit.cover,),
-                                            ),
-                                          ),
-                                        ),
-                                        Text('T-Shirt',
-                                          style: GoogleFonts.playfairDisplay(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold
-                                          )),
-                                        Text('300.00 EGP',
-                                          style: GoogleFonts.playfairDisplay(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w200
-
-                                          )),
-                                        Text('from Amazon',
-                                          style: GoogleFonts.playfairDisplay(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold
-                                          ))
-                                      ],
-                                    ),
-                                  )
-
-                                ],
-                              );
-                            }),
-                      ),
+                      BestSellerList(),
                       SizedBox(height: 200,)
 
 

@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
     var provider =Provider.of<MyProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: provider.firebaseUser!=null? HomeScreen.routeName
-          :SplashScreen.routeName,
+      initialRoute: HomeScreen.routeName,
+      // initialRoute: provider.firebaseUser!=null? HomeScreen.routeName
+      //     :SplashScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         SplashScreen.routeName: (context) => SplashScreen(),
@@ -26,8 +27,6 @@ class MyApp extends StatelessWidget {
         CompareScreen.routeName: (context) => CompareScreen(),
         SignupScreen.routeName: (context) => SignupScreen(),
         HomeTab.routeName: (context) => HomeTab(),
-
-
       },
       title: 'Flutter Demo',
     );
