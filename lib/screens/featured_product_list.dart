@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:price_comparison_app/app_assets/app_assets.dart';
+import 'package:price_comparison_app/screens/bodycon_skirt.dart';
+import 'package:price_comparison_app/screens/chiffon_skirt.dart';
+import 'package:price_comparison_app/screens/denim_jacket.dart';
 import 'package:price_comparison_app/screens/jacket.dart';
 import 'package:price_comparison_app/screens/product_screen.dart';
 import 'package:price_comparison_app/screens/slim_fit_jacket.dart';
@@ -140,7 +143,7 @@ class FeaturedProductList extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => BodyconSkirt()));
                       },
                       child: Container(
                         height: 200,
@@ -193,7 +196,7 @@ class FeaturedProductList extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => DenimJacket()));
                       },
                       child: Container(
                         height: 200,
@@ -246,7 +249,7 @@ class FeaturedProductList extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ChiffonSkirt()));
                       },
                       child: Container(
                         height: 200,

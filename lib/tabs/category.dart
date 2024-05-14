@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:price_comparison_app/models/category_model.dart';
 import 'package:price_comparison_app/screens/category_item.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class CategoryTab extends StatefulWidget {
@@ -24,7 +25,7 @@ class _CategoryTabState extends State<CategoryTab> {
         toolbarHeight: 72,
         title: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('Categories',
+          child: Text('Online Stores',
             style: GoogleFonts.playfairDisplay(
                 color: Colors.white,
                 fontWeight: FontWeight.w300,
@@ -41,27 +42,141 @@ class _CategoryTabState extends State<CategoryTab> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(
-          left: 15,
-          right: 15,
           top: 23
         ),
-        child: Container(
-          height: 647,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: AppColors.white
-          ),
-          child: GridView.builder(
-            padding: EdgeInsets.all(10),
-              itemCount: categories.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, mainAxisSpacing: 10, crossAxisSpacing: 10),
-              itemBuilder: (context, index) {
-                return InkWell(
-                    onTap: (){},
-                    child: CategoryItem(categories[index],index));
-              }),
-
+        child: Column(
+          children: [
+            InkWell(
+              onTap: (){
+                const link= "https://www.amazon.eg/";
+                launchUrl(
+                    Uri.parse(link),
+                    mode: LaunchMode.externalApplication);
+              },
+              child: Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.black12,
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 30,),
+                    Image.asset("assets/images/amazon logo.png"),
+                    SizedBox(height: 10,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.black26,)
+                      ],
+                    ),
+                    SizedBox(height: 30,),
+                    Text("Average Rate : 4.0",
+                    style: TextStyle(
+                      fontSize: 16
+                    ),),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 25,),
+            InkWell(
+              onTap: (){
+                const link= "https://www.zara.com/";
+                launchUrl(
+                    Uri.parse(link),
+                    mode: LaunchMode.externalApplication
+                );
+              },
+              child: Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(20)
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 30,),
+                    Image.asset("assets/images/zara logo.png"),
+                    SizedBox(height: 10,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.black26,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.black26,)
+                      ],
+                    ),
+                    SizedBox(height: 30,),
+                    Text("Average Rate : 3.0",
+                      style: TextStyle(
+                          fontSize: 16
+                      ),),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 25,),
+            InkWell(
+              onTap: (){
+                const link= "https://ar.shein.com/";
+                launchUrl(
+                    Uri.parse(link),
+                    mode: LaunchMode.externalApplication
+                );
+              },
+              child: Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(20)
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 30,),
+                    Image.asset("assets/images/shein logo.png"),
+                    SizedBox(height: 10,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.yellow,),
+                        SizedBox(width: 20,),
+                        Icon(Icons.star_rate_sharp,color: Colors.black26,)
+                      ],
+                    ),
+                    SizedBox(height: 30,),
+                    Text("Average Rate : 4.0",
+                      style: TextStyle(
+                          fontSize: 16
+                      ),),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

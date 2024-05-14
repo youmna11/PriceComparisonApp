@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:price_comparison_app/app_assets/app_assets.dart';
-import 'package:price_comparison_app/screens/product_screen.dart';
+import 'package:price_comparison_app/screens/Workout_tops.dart';
+import 'package:price_comparison_app/screens/blazer.dart';
+import 'package:price_comparison_app/screens/jacket_amazon.dart';
+import 'package:price_comparison_app/screens/padded_jacket.dart';
+import 'package:price_comparison_app/screens/relaxed_fit_jacket.dart';
 
 class MostPopularList extends StatelessWidget {
   const MostPopularList({Key? key}) : super(key: key);
@@ -32,7 +35,7 @@ class MostPopularList extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => RelaxedFitJacket()));
                       },
                       child: Container(
                         height: 200,
@@ -85,7 +88,7 @@ class MostPopularList extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutTops()));
                       },
                       child: Container(
                         height: 200,
@@ -138,7 +141,7 @@ class MostPopularList extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PaddedJacket()));
                       },
                       child: Container(
                         height: 200,
@@ -191,7 +194,7 @@ class MostPopularList extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Blazer()));
                       },
                       child: Container(
                         height: 200,
@@ -244,7 +247,7 @@ class MostPopularList extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => JacketAmazon()));
                       },
                       child: Container(
                         height: 200,
