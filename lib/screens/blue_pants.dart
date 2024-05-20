@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:price_comparison_app/app_colors/app_color.dart';
-import 'package:price_comparison_app/screens/home_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../app_colors/app_color.dart';
+import 'home_screen.dart';
 
-
-class DenimJacket extends StatelessWidget {
-  DenimJacket({Key? key}) : super(key: key);
+class Blue_Pants extends StatelessWidget {
+  const Blue_Pants ({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +20,8 @@ class DenimJacket extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
-                      Image.asset("assets/images/1920000.jpg",
-                        height: 580,
+                      Image.asset("assets/images/155000.jpg",
+                        height: 480,
                         width: double.infinity,
                         fit: BoxFit.cover,),
                       Padding(
@@ -53,7 +52,7 @@ class DenimJacket extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 300,
+                  height: 400,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(35),
@@ -63,22 +62,22 @@ class DenimJacket extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
-                        top: 15
+                        left: 30,
+                        right: 30,
+                        top: 30
                     ),
                     child: Column(
                       children: [
                         Row(
                           children: [
-                            Text('Denim Jacket',
+                            Text('BAM Women',
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold
                                 )),
                           ],
                         ),
-                        SizedBox(height: 40,),
+                        SizedBox(height: 60,),
                         Row(
                           children: [
                             Text("Product Details: ",
@@ -88,16 +87,16 @@ class DenimJacket extends StatelessWidget {
                               ),),
                           ],
                         ),
-                        Text("Denim jacket with lapel collar and long sleeves with buttoned cuffs. Flap pockets at chest and welt pockets at hip. All over washed effect and rips. Front button closure.",
+                        Text(" BAM Women's Heavy Milton Sweatpant in Blue, 100% Cotton, Sweatpant for Women, Casual and Comfortable Wear",
                           style: GoogleFonts.playfairDisplay(
                               fontSize: 13,
                               fontWeight: FontWeight.w400
                           ),),
-                        SizedBox(height: 40,),
+                        SizedBox(height: 110,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('\$50',
+                            Text('\$599',
                               style: GoogleFonts.playfairDisplay(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -105,7 +104,7 @@ class DenimJacket extends StatelessWidget {
                               ),),
                             ElevatedButton(
                                 onPressed: (){
-                                  const link= "https://www.amazon.de/-/en/Dr-Denim-Mens-Eno-Jacket/dp/B08BV1SH9T?th=1";
+                                  const link= "https://www.amazon.eg/-/en/BAM-Womens-Milton-Sweatpant-Comfortable/dp/B0CND9DKGG";
                                   launchUrl(
                                       Uri.parse(link),
                                       mode: LaunchMode.externalApplication);
@@ -118,8 +117,8 @@ class DenimJacket extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 100,
-                                      right: 100
+                                    left: 90,
+                                    right: 90,
                                   ),
                                   child: Text('Go Amazon',style: GoogleFonts.playfairDisplay(
                                       fontSize: 14,

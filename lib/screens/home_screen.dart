@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     label: '',
                     backgroundColor: AppColors.white),
                 BottomNavigationBarItem(
-                    icon: const ImageIcon(AssetImage("assets/images/category.png"),size: 27,),
+                    icon: const ImageIcon(AssetImage("assets/images/stores.png"),size: 27,),
                     label: '',
                     backgroundColor: AppColors.white),
                 BottomNavigationBarItem(

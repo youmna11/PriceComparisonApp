@@ -122,17 +122,18 @@ class _CameraTabState extends State<CameraTab> {
               Padding(
                 padding: const EdgeInsets.only(
                   top: 10,
-                  left: 320
                 ),
-                child: FloatingActionButton(
-                  shape: CircleBorder(),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 0.0, bottom: 0),
-                    child: Icon(Icons.camera_alt_rounded,
-                        color: AppColors.lightGreen, size: 22),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: AppColors.lightMint,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)
+                    )
                   ),
-                  backgroundColor: AppColors.blue,
-                  tooltip: 'Increment',
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 50,right: 50),
+                    child: Text("Upload Picture",style: TextStyle(color: Colors.white),),
+                  ),
                   onPressed: () => _showOption(context),
                 ),
               ),

@@ -152,7 +152,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                         color: Colors.black87, fontSize: 20)),
                               ),
                               SizedBox(
-                                width: 30,
+                                width: 20,
                               ),
                               Text(
                                 "${pro.userModel?.name}",
@@ -180,14 +180,14 @@ class _ProfileTabState extends State<ProfileTab> {
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                    padding: const EdgeInsets.only(left: 10),
                                     child: Text("Email  ",
                                         style: TextStyle(
                                             color: Colors.black87,
                                             fontSize: 20)),
                                   ),
                                   SizedBox(
-                                    width: 20,
+                                    width: 8,
                                   ),
                                   Text(
                                     "${pro.userModel?.email}",
@@ -215,7 +215,7 @@ class _ProfileTabState extends State<ProfileTab> {
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                    padding: const EdgeInsets.only(left: 10),
                                     child: Text("Number  ",
                                         style: TextStyle(
                                             color: Colors.black87,
@@ -257,7 +257,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                    padding: const EdgeInsets.only(left: 10),
                                     child: Text(
                                       AppStrings.setting,
                                       style: TextStyle(
@@ -296,7 +296,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 20),
+                                    padding: const EdgeInsets.only(left: 10),
                                     child: Text(
                                       AppStrings.signout,
                                       style: TextStyle(

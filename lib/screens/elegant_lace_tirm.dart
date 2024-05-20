@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:price_comparison_app/app_colors/app_color.dart';
-import 'package:price_comparison_app/screens/home_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../app_colors/app_color.dart';
+import 'home_screen.dart';
 
-
-class DenimJacket extends StatelessWidget {
-  DenimJacket({Key? key}) : super(key: key);
+class Elegant_Lace_Trim extends StatelessWidget {
+  const Elegant_Lace_Trim({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class DenimJacket extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Stack(
                     children: [
-                      Image.asset("assets/images/1920000.jpg",
+                      Image.asset("assets/images/139000.jpg",
                         height: 580,
                         width: double.infinity,
                         fit: BoxFit.cover,),
@@ -63,15 +62,15 @@ class DenimJacket extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
+                        left: 30,
+                        right: 30,
                         top: 15
                     ),
                     child: Column(
                       children: [
                         Row(
                           children: [
-                            Text('Denim Jacket',
+                            Text('Elegant Lace Trim Shirts',
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold
@@ -88,16 +87,16 @@ class DenimJacket extends StatelessWidget {
                               ),),
                           ],
                         ),
-                        Text("Denim jacket with lapel collar and long sleeves with buttoned cuffs. Flap pockets at chest and welt pockets at hip. All over washed effect and rips. Front button closure.",
+                        Text("Women’s Elegant Lace Trim Shirts Casual Victorian Blouse Long Sleeve Button Down Tops.",
                           style: GoogleFonts.playfairDisplay(
                               fontSize: 13,
                               fontWeight: FontWeight.w400
                           ),),
-                        SizedBox(height: 40,),
+                        SizedBox(height: 70,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('\$50',
+                            Text('\$999',
                               style: GoogleFonts.playfairDisplay(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -105,7 +104,7 @@ class DenimJacket extends StatelessWidget {
                               ),),
                             ElevatedButton(
                                 onPressed: (){
-                                  const link= "https://www.amazon.de/-/en/Dr-Denim-Mens-Eno-Jacket/dp/B08BV1SH9T?th=1";
+                                  const link= "https://www.amazon.de/Damen-mit-%C3%84rmeln-Bluse-Ausverkaufsangebote/dp/B0CWH3S2KQ";
                                   launchUrl(
                                       Uri.parse(link),
                                       mode: LaunchMode.externalApplication);
@@ -118,8 +117,8 @@ class DenimJacket extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 100,
-                                      right: 100
+                                    left: 90,
+                                    right: 90,
                                   ),
                                   child: Text('Go Amazon',style: GoogleFonts.playfairDisplay(
                                       fontSize: 14,

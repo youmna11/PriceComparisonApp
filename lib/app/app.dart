@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
     var provider =Provider.of<MyProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeScreen.routeName,
-      // initialRoute: provider.firebaseUser!=null? HomeScreen.routeName
-      //     :SplashScreen.routeName,
+      // initialRoute: HomeScreen.routeName,
+      initialRoute: provider.firebaseUser!=null? HomeScreen.routeName
+          :SplashScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         SplashScreen.routeName: (context) => SplashScreen(),

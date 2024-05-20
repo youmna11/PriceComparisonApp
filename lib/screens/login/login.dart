@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:price_comparison_app/providers/my_provider.dart';
+import 'package:price_comparison_app/screens/forget_password_page.dart';
 import 'package:price_comparison_app/screens/home_screen.dart';
 import 'package:price_comparison_app/screens/signup/signup.dart';
 import 'package:price_comparison_app/shared/network/firebase/firebase_functions.dart';
@@ -20,6 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
   bool passToggle = true;
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +124,36 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
-              SizedBox(height: 60),
+              SizedBox(height: 10,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ForgetPasswordPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Forget Password ? ",
+                        style: TextStyle(
+                          color: AppColors.lightGreen,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 50),
               InkWell(
                 onTap: () {
                   if (formKey.currentState!.validate()) {

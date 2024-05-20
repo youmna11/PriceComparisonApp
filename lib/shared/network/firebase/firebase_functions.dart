@@ -4,7 +4,6 @@ import 'package:price_comparison_app/models/user_model.dart';
 
 class FirebaseFunctions{
 
-
   static CollectionReference<UserModel> getUsersCollection(){
     return FirebaseFirestore.instance
         .collection("Users")
@@ -68,7 +67,4 @@ class FirebaseFunctions{
     await getUsersCollection().doc(userId).get();
     return userDoc.data();
   }
-
-
-
 }
