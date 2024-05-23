@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:price_comparison_app/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseFunctions{
 
@@ -31,6 +32,13 @@ class FirebaseFunctions{
       var collection= getUsersCollection();
       var docRef=collection.doc(credential.user!.uid);
       docRef.set(userModel);
+
+      SharedPreferences.getInstance().then((prefs) {
+
+        String userId = credential.user!.uid;
+        prefs.setString('userId', userId);
+      });
+
       // credential.user!.sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -50,6 +58,12 @@ class FirebaseFunctions{
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
+        SharedPreferences.getInstance().then((prefs) {
+
+
+          String? userId = value.user?.uid;
+          prefs.setString('userId', userId!);
+        });
         onComplete();
       });
     } on FirebaseAuthException catch (e) {

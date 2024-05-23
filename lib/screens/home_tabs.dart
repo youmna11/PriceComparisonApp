@@ -4,18 +4,32 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:price_comparison_app/screens/details_screen.dart';
 
-class SearchScreen extends StatefulWidget {
-  SearchScreen({Key? key}) : super(key: key);
+class HomeTabs extends StatefulWidget {
+  final String tabType ;
+  HomeTabs({Key? key , required this.tabType}) : super(key: key);
+
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<HomeTabs> createState() => _HomeTabsState(tabType);
+
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  TextEditingController _searchController = TextEditingController();
+class _HomeTabsState extends State<HomeTabs> {
+  String tabtype;
+ // TextEditingController _searchController = TextEditingController();
   List<dynamic> _searchResults = [];
   bool _isLoading = false;
   String _errorMessage = '';
+
+  _HomeTabsState( this.tabtype);
+
+  @override
+  void initState() {
+
+    super.initState();
+
+    _performSearchInAPI(tabtype);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,39 +39,39 @@ class _SearchScreenState extends State<SearchScreen> {
         padding: const EdgeInsets.only(top: 50, right: 15, left: 15),
         child: Column(
           children: [
-            TextField(
-              controller: _searchController,
-              textInputAction: TextInputAction.done,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  borderSide: BorderSide(color: AppColors.lightGreen),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.lightGreen),
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                suffixIcon: Icon(Icons.search, color: AppColors.lightGreen),
-                labelText: "Search",
-                contentPadding: EdgeInsets.all(12),
-                labelStyle: GoogleFonts.playfairDisplay(
-                  color: AppColors.lightGreen,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w300,
-                ),
-                filled: true,
-                fillColor: Colors.white,
-              ),
-              onChanged: (query) {
-                if (query.isEmpty || query == " "){
-
-                } else {
-                  _performSearch(query);
-                }
-
-
-              },
-            ),
+            // TextField(
+            //   controller: _searchController,
+            //   textInputAction: TextInputAction.done,
+            //   decoration: InputDecoration(
+            //     enabledBorder: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(50),
+            //       borderSide: BorderSide(color: AppColors.lightGreen),
+            //     ),
+            //     focusedBorder: OutlineInputBorder(
+            //       borderSide: BorderSide(color: AppColors.lightGreen),
+            //       borderRadius: BorderRadius.circular(50),
+            //     ),
+            //     suffixIcon: Icon(Icons.search, color: AppColors.lightGreen),
+            //     labelText: "Search",
+            //     contentPadding: EdgeInsets.all(12),
+            //     labelStyle: GoogleFonts.playfairDisplay(
+            //       color: AppColors.lightGreen,
+            //       fontSize: 15,
+            //       fontWeight: FontWeight.w300,
+            //     ),
+            //     filled: true,
+            //     fillColor: Colors.white,
+            //   ),
+            //   onChanged: (query) {
+            //     if (query.isEmpty || query == " "){
+            //
+            //     } else {
+            //       _performSearch(query);
+            //     }
+            //
+            //
+            //   },
+            // ),
             if (_isLoading)
               CircularProgressIndicator()
             else if (_errorMessage.isNotEmpty)
@@ -163,7 +177,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  void _performSearch(String query) async {
+  void _performSearchInAPI(String query) async {
     setState(() {
       _isLoading = true;
       _errorMessage = '';
@@ -173,6 +187,7 @@ class _SearchScreenState extends State<SearchScreen> {
       var dio = Dio();
       final response = await dio.get(
         'https://3d48-105-42-237-151.ngrok-free.app/api/products/',
+
         queryParameters: {'search': query},
       );
 

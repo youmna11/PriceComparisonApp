@@ -1,18 +1,89 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:price_comparison_app/app_assets/app_assets.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
-import 'package:price_comparison_app/screens/product_screen.dart';
+import 'package:price_comparison_app/screens/details_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-
-class FavoriteTab extends StatelessWidget {
+class FavoriteTab extends StatefulWidget {
   const FavoriteTab({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+  _FavoriteTabState createState() => _FavoriteTabState();
+}
 
+class _FavoriteTabState extends State<FavoriteTab> {
+  List<dynamic> favoriteItems = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchFavoriteItems();
+  }
+
+  Future<void> fetchFavoriteItems() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String userSignature = prefs.getString('userId') ?? ''; // Provide a default value
+      print("this is the user id for this loged in user _____________________ $userSignature");
+
+      DatabaseReference ref = FirebaseDatabase.instance.ref("Favorite").child(userSignature);
+      final DatabaseEvent event = await ref.once();
+      final DataSnapshot snapshot = event.snapshot;
+
+      if (snapshot.value != null && snapshot.value is Map<dynamic, dynamic>) {
+        Map<dynamic, dynamic>? data = snapshot.value as Map<dynamic, dynamic>?;
+
+        if (data != null) {
+          favoriteItems.clear();
+          data.forEach((key, value) {
+            final item = value as Map<dynamic, dynamic>;
+            item['id'] = key; // Add the document ID to the order map
+            favoriteItems.add(item);
+          });
+        }
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    } catch (error) {
+      print('Error fetching data: $error');
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  Future<void> removeFavoriteItem(String itemId) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String userSignature = prefs.getString('userId') ?? '';
+
+      DatabaseReference ref = FirebaseDatabase.instance.ref("Favorite").child(userSignature).child(itemId);
+      await ref.remove();
+
+      setState(() {
+        favoriteItems.removeWhere((item) => item['id'] == itemId);
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: AppColors.lightGreen,
+            content: Text('Item removed from favorites')),
+      );
+    } catch (error) {
+      print('Error removing item: $error');
+    }
+  }
+
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -20,328 +91,116 @@ class FavoriteTab extends StatelessWidget {
         toolbarHeight: 72,
         title: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('Favorite',
+          child: Text(
+            'Favorite',
             style: GoogleFonts.playfairDisplay(
-                color: Colors.white,
-                fontWeight: FontWeight.w300,
-                fontSize: 20
-            ),),
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
+              fontSize: 20,
+            ),
+          ),
         ),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(30),
-                bottomLeft: Radius.circular(30)
-            )
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(30),
+            bottomLeft: Radius.circular(30),
+          ),
         ),
-
       ),
-      body: Padding(
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Padding(
         padding: const EdgeInsets.only(top: 30),
-        child: GridView.count(
-          crossAxisCount: 2,
-          primary: false,
-          childAspectRatio: 0.7,
-          mainAxisSpacing: 5,
-          crossAxisSpacing: 0,
-          children: [
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 40,
-                  ),
-                  child: Container(
-                    height: 270,
-                    width: 143,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 40,
-                  ),
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProductScreen()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 143,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              AppAssets.product,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'T-Shirt',
-                        style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '300.00 EGP',
-                        style:
-                        TextStyle(fontSize: 12, fontWeight: FontWeight.w200),
-                      ),
-                      Text(
-                        'from Amazon',
-                        style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                  ),
-                  child: Container(
-                    height: 270,
-                    width: 143,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                  ),
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProductScreen()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 143,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              AppAssets.product,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'T-Shirt',
-                        style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '200.00 EGP',
-                        style:
-                        TextStyle(fontSize: 12, fontWeight: FontWeight.w200),
-                      ),
-                      Text(
-                        'from Jumia',
-                        style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 40
-                  ),
-                  child: Container(
-                    height: 270,
-                    width: 143,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 40
-                  ),
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProductScreen()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 143,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              AppAssets.product,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'T-Shirt',
-                        style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '150.00 EGP',
-                        style:
-                        TextStyle(fontSize: 12, fontWeight: FontWeight.w200,
-                            color: Colors.red),
-                      ),
-                      Text(
-                        'from SHEIN',
-                        style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20
-                  ),
-                  child: Container(
-                    height: 270,
-                    width: 143,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20
-                  ),
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProductScreen()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 143,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              AppAssets.product,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'T-Shirt',
-                        style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '400.00 EGP',
-                        style:
-                        TextStyle(fontSize: 12, fontWeight: FontWeight.w200),
-                      ),
-                      Text(
-                        'from NOON',
-                        style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 40
-                  ),
-                  child: Container(
-                    height: 270,
-                    width: 143,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 40
-                  ),
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProductScreen()));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 143,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              AppAssets.product,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'T-Shirt',
-                        style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '600.00 EGP',
-                        style:
-                        TextStyle(fontSize: 12, fontWeight: FontWeight.w200),
-                      ),
-                      Text(
-                        'from ZARA',
-                        style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            )
-          ],
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 0,
+            childAspectRatio: 0.7,
+          ),
+          itemCount: favoriteItems.length,
+          itemBuilder: (context, index) {
+            var item = favoriteItems[index];
+            return buildFavoriteItem(item);
+          },
         ),
+      ),
+    );
+  }
+
+  Widget buildFavoriteItem(dynamic item) {
+    int price = item["price"] ;
+    double convertedPrice =  price.toDouble() ;
+    return InkWell(
+      onTap: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsScreen(itemName:item["name"] , itemPrice: convertedPrice , itemImage: item["image"], itemBrand: item["brand"], itemDescription: item["description"], itemLink: item["url"]),
+          ),
+        );
+      } ,
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 23),
+            child: Container(
+              height: 270,
+              width: 160,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 23),
+            child: Column(
+              children: [
+                InkWell(
+
+                  child: Container(
+                    height: 200,
+                    width: 160,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(item["image"] ?? "no image",
+                        fit: BoxFit.cover,),
+                    ),
+                  ),
+                ),
+                Text(
+                  item['name'] ,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '\$${item['price']}',
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w200),
+                ),
+                Text(
+                  'from ${item['brand']}',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 130,top: 10),
+            child: Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: AppColors.lightMint,
+              ),
+              child: IconButton(
+                  onPressed: (){
+                    removeFavoriteItem(item['id']);
+                  },
+                  icon: Icon(Icons.delete_outline_rounded,color: AppColors.lightGreen,)),
+            ),
+          )
+        ],
       ),
     );
   }

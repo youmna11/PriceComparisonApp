@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "492939404913",
+    "firebase_url": "https://price-comparison-app-87747-default-rtdb.firebaseio.com",
+    "project_id": "price-comparison-app-87747",
+    "storage_bucket": "price-comparison-app-87747.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492939404913:android:4fec29e84d60dd59fbddd0",
+        "android_client_info": {
+          "package_name": "com.example.price_comparison_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8BpR5AjYvfBdA_Va0t0Mjaj5SMhC9HVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

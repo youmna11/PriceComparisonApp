@@ -11,7 +11,7 @@ class AppStrings{
   static const String onBoardingSubTitleFive = 'When the target product selection is complete, go now to buy it using our app and trust all our processes.';
   static const String email = 'youmna@gmail.com';
   static const String phone = '01012885532';
-  static const String signout = 'SignOut';
+  static const String logout = 'LogOut';
   static const String setting = 'Setting';
 
 

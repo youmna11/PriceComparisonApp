@@ -1,16 +1,16 @@
+import 'dart:convert';
 import 'dart:typed_data';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:price_comparison_app/app_strings/app_strings.dart';
 import 'package:price_comparison_app/providers/my_provider.dart';
 import 'package:price_comparison_app/screens/login/login.dart';
 import 'package:price_comparison_app/screens/setting_screen.dart';
-import 'package:price_comparison_app/utils.dart';
-import 'package:provider/provider.dart';
 
 class ProfileTab extends StatefulWidget {
   static const String routeName = "profiletab";
@@ -24,13 +24,52 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   Uint8List? _image;
 
-  void selectedImage() async {
-    Uint8List img = await pickImage(ImageSource.gallery);
-    setState(() {
-      _image = img;
-    });
+  @override
+  void initState() {
+    super.initState();
+    getImage();
   }
 
+  void selectedImage() async {
+    Uint8List? img = await pickImage(ImageSource.gallery);
+    if (img != null) {
+      setState(() {
+        _image = img;
+
+        SharedPreferences.getInstance().then((prefs) {
+          // Encode the image data as a base64 string
+          String imageData = base64Encode(img);
+          prefs.setString('image', imageData);
+        });
+      });
+    }
+  }
+
+  void getImage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String imageData = prefs.getString('image') ?? '';
+
+    if (imageData.isNotEmpty) {
+      // Decode the base64 string to obtain the image data as bytes
+      Uint8List bytes = base64Decode(imageData);
+      setState(() {
+        _image = bytes;
+      });
+      print("Image data retrieved successfully.");
+    } else {
+      print("No image data found in SharedPreferences.");
+    }
+  }
+
+  // Helper function to pick image (assumed to be implemented)
+  Future<Uint8List?> pickImage(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: source);
+    if (image != null) {
+      return await image.readAsBytes();
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +78,19 @@ class _ProfileTabState extends State<ProfileTab> {
     return Scaffold(
       backgroundColor: AppColors.blue,
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SettingScreen()));
+              ;
+            },
+          ),
+        ],
         backgroundColor: AppColors.lightGreen,
         toolbarHeight: 72,
         title: Padding(
@@ -83,7 +135,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     radius: 100,
                                     backgroundImage: MemoryImage(_image!),
                                   ),
-                                )
+                                ),
                               ),
                             )
                           : Padding(
@@ -120,7 +172,7 @@ class _ProfileTabState extends State<ProfileTab> {
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 40,
                   ),
                   Container(
                     width: double.infinity,
@@ -138,11 +190,15 @@ class _ProfileTabState extends State<ProfileTab> {
                         Container(
                           height: 50,
                           width: 350,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: AppColors.lightGreen, width: 1),
-                          ),
+                          // decoration: BoxDecoration(
+                          //   border: Border.symmetric(
+                          //     horizontal:BorderSide(
+                          //         color: AppColors.lightGreen, width: 1),
+                          //   ) ,
+                          //   // borderRadius: BorderRadius.circular(10),
+                          //   // border: Border.all(
+                          //   //     color: AppColors.lightGreen, width: 1),
+                          // ),
                           child: Row(
                             children: [
                               Padding(
@@ -152,7 +208,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                         color: Colors.black87, fontSize: 20)),
                               ),
                               SizedBox(
-                                width: 20,
+                                width: 34,
                               ),
                               Text(
                                 "${pro.userModel?.name}",
@@ -164,24 +220,32 @@ class _ProfileTabState extends State<ProfileTab> {
                             ],
                           ),
                         ),
+                        Divider(
+                          thickness: 2,
+                          color: AppColors.green,
+                        ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         InkWell(
                           onTap: () {},
                           child: Container(
                               height: 50,
                               width: 350,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.lightGreen, width: 1),
-                              ),
+                              // decoration: BoxDecoration(
+                              //     border: Border.symmetric(
+                              //       horizontal:BorderSide(
+                              //           color: AppColors.lightGreen, width: 1),
+                              //     ) ,
+                              // //   borderRadius: BorderRadius.circular(10),
+                              // //   border: Border.all(
+                              // //       color: AppColors.lightGreen, width: 1),
+                              //  ),
                               child: Row(
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
-                                    child: Text("Email  ",
+                                    child: Text("Email        ",
                                         style: TextStyle(
                                             color: Colors.black87,
                                             fontSize: 20)),
@@ -199,24 +263,31 @@ class _ProfileTabState extends State<ProfileTab> {
                                 ],
                               )),
                         ),
+                        Divider(
+                          thickness: 2,
+                          color: AppColors.green,
+                        ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         InkWell(
                           onTap: () {},
                           child: Container(
                               height: 50,
                               width: 350,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.lightGreen, width: 1),
-                              ),
+                              // decoration: BoxDecoration(
+                              //   // borderRadius: BorderRadius.circular(10),
+                              //   border: Border.symmetric(
+                              //     horizontal:BorderSide(
+                              //         color: AppColors.lightGreen, width: 1),
+                              //   ) ,
+                              //
+                              // ),
                               child: Row(
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
-                                    child: Text("Number  ",
+                                    child: Text("Number ",
                                         style: TextStyle(
                                             color: Colors.black87,
                                             fontSize: 20)),
@@ -234,84 +305,49 @@ class _ProfileTabState extends State<ProfileTab> {
                                 ],
                               )),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SettingScreen()));
-                          },
-                          child: Container(
-                              height: 50,
-                              width: 350,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.lightGreen, width: 1),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      AppStrings.setting,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.navigate_next,
-                                    color: AppColors.lightGreen,
-                                    size: 25,
-                                  ),
-                                ],
-                              )),
+                        Divider(
+                          thickness: 2,
+                          color: AppColors.green,
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 70,
                         ),
                         InkWell(
                           onTap: () {
                             pro.logOut();
                             Navigator.pushNamedAndRemoveUntil(context,
                                 LoginScreen.routeName, (route) => false);
+                            SharedPreferences.getInstance().then((prefs) {
+                              // Encode the image data as a base64 string
+
+                              prefs.setString('image', '');
+                            });
                           },
                           child: Container(
-                              height: 50,
-                              width: 350,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: AppColors.lightGreen, width: 1),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      AppStrings.signout,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w400),
-                                    ),
+                            height: 40,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              color: AppColors.green,
+                              borderRadius: BorderRadius.circular(15),
+                              border:
+                                  Border.all(color: AppColors.green, width: 0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 30),
+                                  child: Text(
+                                    AppStrings.logout,
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  Icon(
-                                    Icons.navigate_next,
-                                    color: AppColors.lightGreen,
-                                    size: 25,
-                                  ),
-                                ],
-                              )),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
