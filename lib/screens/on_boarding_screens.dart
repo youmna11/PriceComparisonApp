@@ -36,7 +36,7 @@ class OnBoardingScreens extends StatelessWidget {
                             fontWeight:   FontWeight.bold
                         ),),
                       onPressed: (){
-                        controller.jumpToPage(2);
+                        controller.jumpToPage(3);
                       },
                     ),
                   )

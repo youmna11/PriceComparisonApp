@@ -18,7 +18,7 @@ class FirebaseFunctions{
 
   }
 
-  static Future<void>signUp(String email, String password, String name, int phone)async{
+  static Future<void>signUp(String email, String password, String name, String phone)async{
     try {
       final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,

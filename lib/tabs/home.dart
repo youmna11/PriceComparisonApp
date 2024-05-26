@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
 import 'package:price_comparison_app/screens/featured_product_list.dart';
-import 'package:price_comparison_app/screens/home_screen.dart';
 import 'package:price_comparison_app/screens/home_tabs.dart';
 import 'package:price_comparison_app/screens/most_popular_list.dart';
 import 'package:price_comparison_app/screens/best_seller_list.dart';
 import 'package:price_comparison_app/screens/search_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 
 class HomeTab extends StatelessWidget {
@@ -163,100 +160,140 @@ class HomeTab extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 10,
-                            left: 5
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.white
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.asset("assets/images/dress.jpg",
-                                  fit: BoxFit.cover,),
-                              ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeTabs(tabType: "dress"),
                             ),
-                            Text("Dresses",style: TextStyle(fontSize: 13),)
-                          ],
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10,
+                              left: 5
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.white
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.asset("assets/images/dress.jpg",
+                                    fit: BoxFit.cover,),
+                                ),
+                              ),
+                              Text("Dresses",style: TextStyle(fontSize: 13),)
+                            ],
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 10,
-                            left: 5
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.white
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.asset("assets/images/shirt.webp",
-                                  fit: BoxFit.cover,),
-                              ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeTabs(tabType: "shirt"),
                             ),
-                            Text("Shirts",style: TextStyle(fontSize: 13),)
-                          ],
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10,
+                              left: 5
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.white
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.asset("assets/images/shirt.webp",
+                                    fit: BoxFit.cover,),
+                                ),
+                              ),
+                              Text("Shirts",style: TextStyle(fontSize: 13),)
+                            ],
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 10,
-                            left: 5
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.white
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.asset("assets/images/skirt.webp",
-                                  fit: BoxFit.cover,),
-                              ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeTabs(tabType: "skirt"),
                             ),
-                            Text("Skirts",style: TextStyle(fontSize: 13),)
-                          ],
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10,
+                              left: 5
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.white
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.asset("assets/images/skirt.webp",
+                                    fit: BoxFit.cover,),
+                                ),
+                              ),
+                              Text("Skirts",style: TextStyle(fontSize: 13),)
+                            ],
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 10,
-                            left: 5
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColors.white
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.asset("assets/images/jacket.jpg",
-                                  fit: BoxFit.cover,),
-                              ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeTabs(tabType: "jacket"),
                             ),
-                            Text("Jackets",style: TextStyle(fontSize: 13),)
-                          ],
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10,
+                              left: 5
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: AppColors.white
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.asset("assets/images/jacket.jpg",
+                                    fit: BoxFit.cover,),
+                                ),
+                              ),
+                              Text("Jackets",style: TextStyle(fontSize: 13),)
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -311,8 +348,6 @@ class HomeTab extends StatelessWidget {
                       SizedBox(height: 20,),
                       BestSellerList(),
                       SizedBox(height: 200,)
-
-
                     ],
                   ),
                 ),

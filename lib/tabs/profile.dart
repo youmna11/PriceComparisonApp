@@ -72,7 +72,7 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
     var pro = Provider.of<MyProvider>(context);
 
     return Scaffold(
@@ -190,32 +190,28 @@ class _ProfileTabState extends State<ProfileTab> {
                         Container(
                           height: 50,
                           width: 350,
-                          // decoration: BoxDecoration(
-                          //   border: Border.symmetric(
-                          //     horizontal:BorderSide(
-                          //         color: AppColors.lightGreen, width: 1),
-                          //   ) ,
-                          //   // borderRadius: BorderRadius.circular(10),
-                          //   // border: Border.all(
-                          //   //     color: AppColors.lightGreen, width: 1),
-                          // ),
                           child: Row(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
-                                child: Text("Name  ",
+                                child: Text("Name",
                                     style: TextStyle(
-                                        color: Colors.black87, fontSize: 20)),
+                                        color: Colors.black87,
+                                        fontSize: 20)),
                               ),
                               SizedBox(
-                                width: 34,
+                                width: 30,
                               ),
-                              Text(
-                                "${pro.userModel?.name}",
-                                style: TextStyle(
-                                    color: Colors.black45,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400),
+                              Expanded(
+                                child: Text(
+                                  "${pro.userModel?.name}",
+                                  style: TextStyle(
+                                      color: Colors.black45,
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.w400),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),
@@ -230,38 +226,34 @@ class _ProfileTabState extends State<ProfileTab> {
                         InkWell(
                           onTap: () {},
                           child: Container(
-                              height: 50,
-                              width: 350,
-                              // decoration: BoxDecoration(
-                              //     border: Border.symmetric(
-                              //       horizontal:BorderSide(
-                              //           color: AppColors.lightGreen, width: 1),
-                              //     ) ,
-                              // //   borderRadius: BorderRadius.circular(10),
-                              // //   border: Border.all(
-                              // //       color: AppColors.lightGreen, width: 1),
-                              //  ),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text("Email        ",
-                                        style: TextStyle(
-                                            color: Colors.black87,
-                                            fontSize: 20)),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
+                            height: 50,
+                            width: 350,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text("E-mail",
+                                      style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 20)),
+                                ),
+                                SizedBox(
+                                  width: 30,
+                                ),
+                                Expanded(
+                                  child: Text(
                                     "${pro.userModel?.email}",
                                     style: TextStyle(
                                         color: Colors.black45,
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.w400),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ],
-                              )),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         Divider(
                           thickness: 2,
@@ -273,37 +265,34 @@ class _ProfileTabState extends State<ProfileTab> {
                         InkWell(
                           onTap: () {},
                           child: Container(
-                              height: 50,
-                              width: 350,
-                              // decoration: BoxDecoration(
-                              //   // borderRadius: BorderRadius.circular(10),
-                              //   border: Border.symmetric(
-                              //     horizontal:BorderSide(
-                              //         color: AppColors.lightGreen, width: 1),
-                              //   ) ,
-                              //
-                              // ),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text("Number ",
-                                        style: TextStyle(
-                                            color: Colors.black87,
-                                            fontSize: 20)),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
+                            height: 50,
+                            width: 350,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text("Phone",
+                                      style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 20)),
+                                ),
+                                SizedBox(
+                                  width: 30,
+                                ),
+                                Expanded(
+                                  child: Text(
                                     "${pro.userModel?.phone}",
                                     style: TextStyle(
                                         color: Colors.black45,
-                                        fontSize: 20.0,
+                                        fontSize: 18.0,
                                         fontWeight: FontWeight.w400),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ],
-                              )),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         Divider(
                           thickness: 2,

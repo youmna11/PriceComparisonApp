@@ -22,6 +22,16 @@ class MyProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+
+  void updateData(String name , String phone)  {
+    if (userModel != null) {
+      userModel!.name = name;
+      userModel!.phone = phone;
+     // await FirebaseFunctions.updateUser(firebaseUser!.uid, {'name': name});
+      notifyListeners();
+    }
+  }
+
   void logOut(){
     FirebaseAuth.instance.signOut();
     notifyListeners();

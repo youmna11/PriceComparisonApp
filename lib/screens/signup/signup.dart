@@ -195,7 +195,7 @@ class _SignupScreen extends State<SignupScreen> {
                    FirebaseFunctions.signUp(emailController.text,
                        passController.text,
                        nameController.text,
-                       int.parse(phoneController.text)).then((value){
+                       int.parse(phoneController.text) as String).then((value){
                      pro.initMyUser();
                      Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
                    }).catchError((e){

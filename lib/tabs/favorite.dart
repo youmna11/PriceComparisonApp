@@ -85,7 +85,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.blue,
       appBar: AppBar(
         backgroundColor: AppColors.lightGreen,
         toolbarHeight: 72,
