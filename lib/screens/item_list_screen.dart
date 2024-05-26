@@ -25,7 +25,14 @@ class ItemListScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DetailsScreen(itemName: productList[index].itemName, itemPrice: productList[index].itemPrice, itemImage: productList[index].itemImage, itemBrand: productList[index].itemBrand, itemDescription: productList[index].itemDescription, itemLink: productList[index].itemLink,),
+                  builder: (context) => DetailsScreen(
+                    itemName: productList[index].itemName,
+                    itemPrice: productList[index].itemPrice,
+                    itemImage: productList[index].itemImage,
+                    itemBrand: productList[index].itemBrand,
+                    itemDescription: productList[index].itemDescription,
+                    itemLink: productList[index].itemLink,
+                  ),
                 ),
               );
             },
@@ -35,3 +42,4 @@ class ItemListScreen extends StatelessWidget {
     );
   }
 }
+

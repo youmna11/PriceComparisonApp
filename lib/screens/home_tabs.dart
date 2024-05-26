@@ -186,7 +186,7 @@ class _HomeTabsState extends State<HomeTabs> {
     try {
       var dio = Dio();
       final response = await dio.get(
-        'https://3d48-105-42-237-151.ngrok-free.app/api/products/',
+        'https://grackle-notable-hardly.ngrok-free.app/api/products/',
 
         queryParameters: {'search': query},
       );

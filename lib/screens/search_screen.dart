@@ -202,7 +202,7 @@ class _SearchScreenState extends State<SearchScreen> {
     try {
       var dio = Dio();
       final response = await dio.get(
-        'https://8f1e-102-191-6-105.ngrok-free.app/api/products/',
+        'https://grackle-notable-hardly.ngrok-free.app/api/products/',
         queryParameters: {'search': query},
       );
 

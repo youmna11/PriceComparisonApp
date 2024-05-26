@@ -19,8 +19,8 @@ class CameraTab extends StatefulWidget {
 class _CameraTabState extends State<CameraTab> {
   Uint8List? _image;
   File? selectedImage;
-  List<String>? _prices;
   bool _isLoading = false;
+  double _uploadProgress = 0.0;
 
   List<Product> productList = [];
 
@@ -29,13 +29,12 @@ class _CameraTabState extends State<CameraTab> {
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
-      // Parse the response and store product details
       var productData = jsonDecode(response.body);
       var productDetails = productData['results'];
 
       for (var item in productDetails) {
         String itemName = item['name'] ?? 'No name available';
-        double itemPrice = item['price'] ?? 'No price available';
+        double itemPrice = item['price'] != null ? double.parse(item['price'].toString()) : 0.0;
         String itemImage = item['image_url'] ?? 'assets/images/placeholder.jpg';
         String itemBrand = item['brand'] ?? 'No brand available';
         String itemDescription = item['description'] ?? 'No description available';
@@ -53,7 +52,6 @@ class _CameraTabState extends State<CameraTab> {
         productList.add(product);
       }
     } else {
-      // Handle error
       print('Failed to fetch data for product: $productId');
     }
   }
@@ -104,7 +102,7 @@ class _CameraTabState extends State<CameraTab> {
       selectedImage = File(returnImage.path);
       _image = File(returnImage.path).readAsBytesSync();
     });
-    Navigator.of(context).pop(); // Close the modal sheet
+    Navigator.of(context).pop();
   }
 
   Future _pickImageFromCamera() async {
@@ -118,65 +116,53 @@ class _CameraTabState extends State<CameraTab> {
   }
 
   Future<void> _uploadImage() async {
-    if (_image == null) return;
+    if (selectedImage == null) return;
+
     setState(() {
       _isLoading = true;
+      _uploadProgress = 0.0;
     });
-    String base64Image = base64Encode(_image!);
 
-    var url = Uri.parse('https://finalfinal-1.onrender.com/predict');
-    var response = await http.post(url,
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode({
-          "image_data": base64Image,
-          "top_n": 5,
-        })
-    );
+    try {
+      final request = http.MultipartRequest(
+        'POST',
+        Uri.parse('https://grackle-notable-hardly.ngrok-free.app/api/process_image/'),
+      );
 
-    if (response.statusCode == 200) {
+      request.files.add(await http.MultipartFile.fromPath('image', selectedImage!.path));
+
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        final products = responseData['products'] as List;
+
+        // Parse the list of products directly into the productList
+        productList = products.map((product) => Product.fromJson(product)).toList();
+
+        setState(() {
+          _isLoading = false;
+        });
+        navigateToItemListScreen();
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+        print('Error: ${response.statusCode}');
+      }
+    } catch (e) {
       setState(() {
-        _prices = List<String>.from(jsonDecode(response.body)['result']);
         _isLoading = false;
       });
-      _showIdsDialog(); // Show dialog with fetched IDs
-    } else {
-      setState(() {
-        _isLoading = false;
-      });
-      // Handle the error
-      print('Error: ${response.statusCode}');
+      print('Error: $e');
     }
   }
 
-  void _showIdsDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          "Image IDs",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        content: SingleChildScrollView(
-          child: Column(
-            children: _prices!.map((price) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                price,
-                style: TextStyle(fontSize: 18),
-              ),
-            )).toList(),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text("Close"),
-          ),
-        ],
-      ),
-    );
+  Future<void> fetchDataForProducts(List<dynamic> productIds) async {
+    for (var productId in productIds) {
+      await fetchDataForProduct(productId);
+    }
   }
 
   @override
@@ -235,7 +221,7 @@ class _CameraTabState extends State<CameraTab> {
                             padding: const EdgeInsets.symmetric(horizontal: 5.0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: AppColors.lightMint,
+                                  backgroundColor: AppColors.lightMint,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)
                                   )
@@ -257,7 +243,7 @@ class _CameraTabState extends State<CameraTab> {
                             padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: AppColors.yellow,
+                                  backgroundColor: AppColors.yellow,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20)
                                   )
@@ -266,17 +252,23 @@ class _CameraTabState extends State<CameraTab> {
                                 "Next",
                                 style: TextStyle(color: Colors.white , fontSize: 20),
                               ),
-                              onPressed: _uploadImage, // Call the upload image function
+                              onPressed: _uploadImage,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    if (_isLoading)
-                      Center(
-                        child: CircularProgressIndicator(), // Show loading indicator
+                    if (_isLoading) ...[
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: LinearProgressIndicator(value: _uploadProgress),
                       ),
-                    Spacer(), // Ensure content stays above the floating action button
+                      Text(
+                        "${(_uploadProgress * 100).toStringAsFixed(2)}%",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                    Spacer(),
                   ],
                 ),
               ),
