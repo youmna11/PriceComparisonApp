@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +12,8 @@ import 'package:price_comparison_app/app_strings/app_strings.dart';
 import 'package:price_comparison_app/providers/my_provider.dart';
 import 'package:price_comparison_app/screens/login/login.dart';
 import 'package:price_comparison_app/screens/setting_screen.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'dart:io';
 
 class ProfileTab extends StatefulWidget {
   static const String routeName = "profiletab";
@@ -31,18 +34,58 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   void selectedImage() async {
-    Uint8List? img = await pickImage(ImageSource.gallery);
-    if (img != null) {
-      setState(() {
-        _image = img;
+    final imgFile = await pickImage(ImageSource.gallery);
+    if (imgFile != null) {
+      final croppedImg = await cropImage(imgFile);
+      if (croppedImg != null) {
+        setState(() {
+          _image = croppedImg;
 
-        SharedPreferences.getInstance().then((prefs) {
-          // Encode the image data as a base64 string
-          String imageData = base64Encode(img);
-          prefs.setString('image', imageData);
+          SharedPreferences.getInstance().then((prefs) {
+            // Encode the image data as a base64 string
+            String imageData = base64Encode(croppedImg);
+            prefs.setString('image', imageData);
+          });
         });
-      });
+      }
     }
+  }
+
+  Future<Uint8List?> cropImage(Uint8List image) async {
+    // Get the temporary directory to save the file
+    final directory = await getTemporaryDirectory();
+    final imagePath = '${directory.path}/temp_image.png';
+
+    // Save the image as a file
+    final file = File(imagePath);
+    await file.writeAsBytes(image);
+
+    // Crop the image
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: file.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Crop Image',
+          toolbarColor: Colors.lightGreen,
+          toolbarWidgetColor: Colors.white,
+          hideBottomControls: true,
+        ),
+        IOSUiSettings(
+          minimumAspectRatio: 1.0,
+        ),
+      ],
+    );
+
+    // If the user did not crop the image, return null
+    if (croppedFile == null) return null;
+
+    // Read the cropped image file as bytes
+    final croppedImageBytes = await croppedFile.readAsBytes();
+
+    return croppedImageBytes;
   }
 
   void getImage() async {
@@ -72,7 +115,7 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   @override
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
     var pro = Provider.of<MyProvider>(context);
 
     return Scaffold(
@@ -87,7 +130,6 @@ class _ProfileTabState extends State<ProfileTab> {
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SettingScreen()));
-              ;
             },
           ),
         ],
@@ -125,34 +167,34 @@ class _ProfileTabState extends State<ProfileTab> {
                     children: [
                       _image != null
                           ? Padding(
-                              padding: const EdgeInsets.only(top: 50),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  height: 75,
-                                  width: 75,
-                                  child: CircleAvatar(
-                                    radius: 100,
-                                    backgroundImage: MemoryImage(_image!),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.only(top: 50),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  height: 75,
-                                  width: 75,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: Colors.black12,
-                                  ),
-                                  child: Image.asset(AppAssets.avatar),
-                                ),
-                              ),
+                        padding: const EdgeInsets.only(top: 50),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            height: 75,
+                            width: 75,
+                            child: CircleAvatar(
+                              radius: 100,
+                              backgroundImage: MemoryImage(_image!),
                             ),
+                          ),
+                        ),
+                      )
+                          : Padding(
+                        padding: const EdgeInsets.only(top: 50),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            height: 75,
+                            width: 75,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: Colors.black12,
+                            ),
+                            child: Image.asset(AppAssets.avatar),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -319,7 +361,7 @@ class _ProfileTabState extends State<ProfileTab> {
                               color: AppColors.green,
                               borderRadius: BorderRadius.circular(15),
                               border:
-                                  Border.all(color: AppColors.green, width: 0),
+                              Border.all(color: AppColors.green, width: 0),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

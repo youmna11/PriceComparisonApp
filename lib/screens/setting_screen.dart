@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:price_comparison_app/app_assets/app_assets.dart';
 import 'package:price_comparison_app/app_colors/app_color.dart';
@@ -212,18 +211,24 @@ class _SettingScreenState extends State<SettingScreen> {
                           fontWeight: FontWeight.w300,
                         ),
                       ),
-                      Spacer(),
-                      InkWell(
-                        onTap: (){},
-                        child: Container(
-                          height: 27,
-                          width: 30,
-                          decoration: BoxDecoration(
-                              color: Colors.black12,
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          child: Icon(Icons.navigate_next,
-                            color: AppColors.lightGreen,),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: (){},
+                              child: Container(
+                                height: 27,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Icon(Icons.navigate_next,
+                                  color: AppColors.lightGreen,),
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     ],
@@ -258,20 +263,26 @@ class _SettingScreenState extends State<SettingScreen> {
                           fontWeight: FontWeight.w300,
                         ),
                       ),
-                      Spacer(),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HelpScreen()));
-                        },
-                        child: Container(
-                          height: 27,
-                          width: 30,
-                          decoration: BoxDecoration(
-                              color: Colors.black12,
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          child: Icon(Icons.navigate_next,
-                            color: AppColors.lightGreen,),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> HelpScreen()));
+                              },
+                              child: Container(
+                                height: 27,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Icon(Icons.navigate_next,
+                                  color: AppColors.lightGreen,),
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     ],
@@ -306,21 +317,27 @@ class _SettingScreenState extends State<SettingScreen> {
                           fontWeight: FontWeight.w300,
                         ),
                       ),
-                      Spacer(),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> InfoScreen()));
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> InfoScreen()));
 
-                        },
-                        child: Container(
-                          height: 27,
-                          width: 30,
-                          decoration: BoxDecoration(
-                              color: Colors.black12,
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          child: Icon(Icons.navigate_next,
-                            color: AppColors.lightGreen,),
+                              },
+                              child: Container(
+                                height: 27,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Icon(Icons.navigate_next,
+                                  color: AppColors.lightGreen,),
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     ],

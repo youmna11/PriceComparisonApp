@@ -51,6 +51,7 @@ dependencies:
   firebase_database: ^10.4.9
   http:
   dio:
+  image_cropper:
 
 
 

@@ -109,6 +109,17 @@ class _FavoriteTabState extends State<FavoriteTab> {
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator())
+          : favoriteItems.isEmpty
+          ? Center(
+        child: Text(
+          'Select a product to add to favorites',
+          style: GoogleFonts.playfairDisplay(
+            color: AppColors.lightGreen,
+            fontSize: 18,
+            fontWeight: FontWeight.w300,
+          ),
+        ),
+      )
           : Padding(
         padding: const EdgeInsets.only(top: 30),
         child: GridView.builder(
